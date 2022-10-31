@@ -4,7 +4,13 @@ import parser from 'body-parser'
 import List from './models/List.js'
 import connection from './connection.js' 
 
+const port = process.env.PORT || 3000
+
 app.use(parser.json());
+
+app.listen(port, () =>
+  console.log(`app listening on port ${port}`)
+);
 
 app.get("/list", function(req, res) {
   List.find({}).then(lists => {
@@ -40,6 +46,3 @@ app.post("/list/:id/item", function(req, res) {
   });
 });
 
-app.listen(3000, () =>
-  console.log("Is your server running? Better go catch it!")
-);
